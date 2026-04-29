@@ -296,7 +296,7 @@
     <div id="login-bonus-modal" class="modal-overlay" style="z-index: 3500;">
         <div class="modal-content" style="width: 320px; text-align: center;">
             <h3 style="color: var(--hp-green); font-size: 24px; margin-bottom: 10px;">🎁 LOGIN BONUS</h3>
-            <p style="font-weight: bold; margin-bottom: 15px;">ログインありがとうございます！<br>本日のボーナスを受け取りました。</p>
+            <p style="font-weight: bold; margin-bottom: 15px;">ログインボーナス！<br>本日のボーナスを受け取りました。</p>
             <div style="background: rgba(0,0,0,0.5); border: 1px solid gold; border-radius: 8px; padding: 15px; margin-bottom: 15px; font-size: 20px; font-weight: bold; color: gold; line-height: 1.6;">
                 🪙 x 500<br>◆ x 5<br><span style="font-size: 16px;">📕 強化の本・赤 x 1</span>
             </div>
@@ -310,7 +310,7 @@
             
             <div id="news-content" style="background: rgba(0,0,0,0.5); border: 1px solid var(--ba-border); border-radius: 8px; padding: 15px; margin-bottom: 15px; font-size: 13px; line-height: 1.6; max-height: 50vh; overflow-y: auto;">
                 <strong style="color: gold;">【アップデート情報】</strong><br>
-                ・エリア8「時渡りの塔」を追加しました！<br>
+                ・⛰️エリア9「水鏡山」を追加しました！<br>
                 <br>
                 <strong style="color: #e74c3c;">【新ぽむ追加】</strong><br>
                 新しいぽむがガチャに登場しました。<br>
@@ -444,10 +444,11 @@
                         <button class="list-btn" id="area-btn-2" onclick="showStageList(2)">‪🌱‬ エリア2：はじまり草原</button>
                         <button class="list-btn" id="area-btn-3" onclick="showStageList(3)">🏖️ エリア3：サンシャインビーチ</button>
                         <button class="list-btn" id="area-btn-4" onclick="showStageList(4)">🌳 エリア4：ホウライ森林</button>
-                        <button class="list-btn" id="area-btn-5" onclick="showStageList(5)">🔥 エリア5：エルド洞窟</button>
+                        <button class="list-btn" id="area-btn-5" onclick="showStageList(5)">🔥 エリア5：エルド凍炎洞窟</button>
                         <button class="list-btn" id="area-btn-6" onclick="showStageList(6)">😈 エリア6：ヘイム湿地</button>
                         <button class="list-btn" id="area-btn-7" onclick="showStageList(7)">⚡ エリア7：ヴァルハラ発電所</button>
-                    <button class="list-btn" id="area-btn-8" onclick="showStageList(8)" style="display: none;">🕒 エリア8：時渡りの塔</button>
+                        <button class="list-btn" id="area-btn-8" onclick="showStageList(8)" style="display: none;">🕒 エリア8：時渡りの塔</button>
+                        <button class="list-btn" id="area-btn-9" onclick="showStageList(9)" style="display: none;">⛰️ エリア9：水鏡山</button>
 </div>
                     <div id="stage-list-view-1" style="display: none;"><button class="back-btn" onclick="hideStageList()">◀ エリア選択に戻る</button><button class="stage-btn list-btn" data-stage-id="1-1" onclick="startPuzzle('1-1')">STAGE 1-1</button><button class="stage-btn list-btn" data-stage-id="1-2" onclick="startPuzzle('1-2')">STAGE 1-2</button><button class="stage-btn list-btn" data-stage-id="1-3" onclick="startPuzzle('1-3')">STAGE 1-3</button><button class="stage-btn list-btn" data-stage-id="1-4" onclick="startPuzzle('1-4')" style="border-color: gold; color: gold;">STAGE 1-BOSS</button></div>
                     <div id="stage-list-view-2" style="display: none;"><button class="back-btn" onclick="hideStageList()">◀ エリア選択に戻る</button><button class="stage-btn list-btn" data-stage-id="2-1" onclick="startPuzzle('2-1')">STAGE 2-1 【岩ギミックを学ぼう】</button><button class="stage-btn list-btn" data-stage-id="2-2" onclick="startPuzzle('2-2')">STAGE 2-2 【バリアギミックを学ぼう】</button><button class="stage-btn list-btn" data-stage-id="2-3" onclick="startPuzzle('2-3')">STAGE 2-3【ブロックギミックを学ぼう】</button><button class="stage-btn list-btn" data-stage-id="2-4" onclick="startPuzzle('2-4')" style="border-color: gold; color: gold;">STAGE 2-BOSS【チュートリアルラスト】</button></div>
@@ -494,8 +495,17 @@
     <button class="stage-btn list-btn" data-stage-id="8-6" onclick="startPuzzle('8-6')">STAGE 8-6</button>
     <button class="stage-btn list-btn" data-stage-id="8-BOSS" onclick="startPuzzle('8-BOSS')" style="border-color: #ff4757; color: #ff4757;">STAGE 8-BOSS 時を渡りしもの</button>
 </div>
+                      <div id="stage-list-view-9" style="display: none;">
+    <button class="back-btn" onclick="hideStageList()">◀ エリア選択に戻る</button>
+    <button class="stage-btn list-btn" data-stage-id="9-1" onclick="startPuzzle('9-1')">STAGE 9-1</button>
+    <button class="stage-btn list-btn" data-stage-id="9-2" onclick="startPuzzle('9-2')">STAGE 9-2</button>
+    <button class="stage-btn list-btn" data-stage-id="9-3" onclick="startPuzzle('9-3')">STAGE 9-3</button>
+    <button class="stage-btn list-btn" data-stage-id="9-4" onclick="startPuzzle('9-4')">STAGE 9-4</button>
+    <button class="stage-btn list-btn" data-stage-id="9-5" onclick="startPuzzle('9-5')">STAGE 9-5</button>
+    <button class="stage-btn list-btn" data-stage-id="9-6" onclick="startPuzzle('9-6')">STAGE 9-6</button>
+    <button class="stage-btn list-btn" data-stage-id="7-5" onclick="startPuzzle('9-BOSS')" style="border-color: gold; color: gold;">STAGE 9-BOSS 伊吹颪</button>
+</div>
                 </div>
-                
                 <div id="event-stages" style="display:none;">
                     <div id="event-area-select">
                         <h3 style="color:#9b59b6; margin-bottom:10px;">経験値ステージ</h3>
@@ -635,7 +645,7 @@
             'gp5': { id: 'gp5', name: 'カブト', img: 'gpom5.png', attr: 'blue',   basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'ノンストップ', skillDesc: '連続発動で倍率上昇(最大2倍)\n3/4/5つ以上で100/100/100%' },
             'gp6': { id: 'gp6', name: 'ベロリンガ', img: 'gpom6.png', attr: 'red',    basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'SR', skill: 'いれかえ', skillDesc: 'お邪魔を自ぽむに変換\n3/4/5つ以上で35/60/100%' },
             'gp7': { id: 'gp7', name: 'ガルーラ', img: 'gpom7.png', attr: 'yellow', basePower: 50, growth: 3, level: 1, exp: 0, rarity: 'HR', skill: 'L字消し強化', skillDesc: 'L字消しで自身のダメージ3倍\n3/4/5つ以上で100/100/100%' },
-            'gp8': { id: 'gp8', name: 'フリーザー', img: 'gpom8.png', attr: 'blue',   basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'こおりのまい', skillDesc: '1ターンの間、🟦属性ダメ2倍\n3/4/5つ以上で30/30/30%' },
+            'gp8': { id: 'gp8', name: 'フリーザー', img: 'gpom8.png', attr: 'blue',   basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'こおりのまい', skillDesc: '1ターンの間、🟦属性ダメ2倍\n3つ↑で30%で発動' },
             'gp9': { id: 'gp9', name: 'ドガース', img: 'gpom9.png', attr: 'purple', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'どくにする', skillDesc: '5Tの間、敵HP1%の毒ダメージ\n3/4/5つ以上で10/50/75%' },
             'gp10': { id: 'gp10', name: 'ブーバー', img: 'gpom10.png', attr: 'red', basePower: 40, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'さいごのちから', skillDesc: '残り3手以下でダメージ3倍\n3/4/5つ以上で50/50/100%' },
             'gp11': { id: 'gp11', name: 'エレブー', img: 'gpom11.png', attr: 'yellow', basePower: 40, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'アップダウン', skillDesc: 'ダメージが0.3〜3.0倍に変動\n3/4/5つ以上で50/80/100%' },
@@ -714,11 +724,11 @@
 'sap10': { id: 'sap10', name: '✨イーブイ', img: 'sapom10.png', attr: 'yellow', basePower: 50, growth: 4, level: 1, exp: 0, rarity: 'RR', skill: 'おうえん', skillDesc: '次に揃えるぽむのスキル発動確率+5%\n3/4/5つ以上で50/100/100%' },
             
             // 新規マスターぽむ追加
-            'mpom1': { id: 'mpom1', name: 'リザードン', img: 'mpom1.png', attr: 'red', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(🟥属性ダメ1.2倍)\n3/4/5つ以上で0/55/80%' },
-            'mpom2': { id: 'mpom2', name: 'カメックス', img: 'mpom2.png', attr: 'blue', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'バリアけし+', skillDesc: 'バリアを3つ消去\n3/4/5つ以上で50/100/100%' },
-            'mpom3': { id: 'mpom3', name: 'フシギバナ', img: 'mpom3.png', attr: 'green', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'L字消し強化', skillDesc: 'L字消しで自身のダメージ3倍\n3/4/5つ以上で100/100/100%' },
-            'mpom5': { id: 'mpom5', name: 'ジュナイパー', img: 'mpom5.png', attr: 'green', basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'エレメントガード', skillDesc: '不利属性に通常ダメージを与え、さらに1.5倍\n3/4/5つ以上で50/100/100%' },
-            'mpom4': { id: 'mpom4', name: 'サザンドラ', img: 'mpom4.png', attr: 'purple', basePower: 70, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'ドラゴンのつめ', skillDesc: 'ダメージ3.0倍\n3/4/5つ以上で5/10/20%' }
+            'mpom1': { id: 'mpom1', name: 'リザードン', img: 'mpom1.png', attr: 'red', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(🟥属性ダメ1.2倍)\n3/4/5つ↑で0/55/80%' },
+            'mpom2': { id: 'mpom2', name: 'カメックス', img: 'mpom2.png', attr: 'blue', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'バリアけし+', skillDesc: 'バリアを3つ消去\n3/4/5つ↑で50/100/100%' },
+            'mpom3': { id: 'mpom3', name: 'フシギバナ', img: 'mpom3.png', attr: 'green', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'L字消し強化', skillDesc: 'L字消しで自身のダメージ3倍\n3/4/5つ↑で100/100/100%' },
+            'mpom5': { id: 'mpom5', name: 'ジュナイパー', img: 'mpom5.png', attr: 'green', basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'エレメントガード', skillDesc: '不利属性に通常ダメージを与え、さらに1.5倍\n3/4/5つ↑で50/100/100%' },
+            'mpom4': { id: 'mpom4', name: 'サザンドラ', img: 'mpom4.png', attr: 'purple', basePower: 70, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'ドラゴンのつめ', skillDesc: 'ダメージ3.0倍\n3/4/5つ↑で5/10/20%' }
         };
 
         const N_POOL = ['gp1', 'gp5', 'gp9','gp15','gp22','gp23','gp24','gp25','gp26','gp27','gp28','gp29','gp30','gp31','gp32','gp33','gp34','gp35','gp36','gp37']; 
@@ -1084,7 +1094,7 @@
         let battleState = { 
             turns: 25, enemyHP: 150, enemyMaxHP: 150, enemyData: null, stageInfo: null, stageId: '',
             enemyCooldown: 3, isDelayed: false, boardData: [], isProcessing: false,
-            nonstopCombo: 0, nonstopTriggeredThisTurn: false, iceDanceActive: false, skillUsedThisTurn: false, 
+            nonstopCombo: 0, nonstopTriggeredThisTurn: false, iceDanceActive: false, petalDanceActive: false, holyComboActive: false, shadowDanceActive: false,skillUsedThisTurn: false, 
             poisonTurns: 0, freezeTurns: 0, burnTurns: 0,
             dokugasaneCombo: 0, dokugasaneTriggeredThisTurn: false,
             cloudTurns: Array.from({length: GRID_ROWS}, () => Array(GRID_COLS).fill(0)),
@@ -1314,11 +1324,11 @@ function playStageBgm(stageId) {
 
         function showStageList(area) { 
             document.getElementById('area-select').style.display = 'none'; 
-            for(let i=1; i<=8; i++) { if(document.getElementById('stage-list-view-' + i)) document.getElementById('stage-list-view-' + i).style.display = 'none'; }
+            for(let i=1; i<=9; i++) { if(document.getElementById('stage-list-view-' + i)) document.getElementById('stage-list-view-' + i).style.display = 'none'; }
             document.getElementById('stage-list-view-' + area).style.display = 'block'; 
         }
         function hideStageList() { 
-            for(let i=1; i<=8; i++) { if(document.getElementById('stage-list-view-' + i)) document.getElementById('stage-list-view-' + i).style.display = 'none'; }
+            for(let i=1; i<=9; i++) { if(document.getElementById('stage-list-view-' + i)) document.getElementById('stage-list-view-' + i).style.display = 'none'; }
             document.getElementById('area-select').style.display = 'block'; 
         }
         function showItemDetail(key) { const item = playerData.items[key]; document.getElementById('modal-title').innerText = item.name; document.getElementById('modal-desc').innerText = item.desc; document.getElementById('item-modal').style.display = 'flex'; }
@@ -1412,6 +1422,7 @@ function playStageBgm(stageId) {
             const area6 = document.getElementById('area-btn-6'); if(area6) area6.style.display = cleared.includes('5-5') ? 'block' : 'none';
             const area7 = document.getElementById('area-btn-7'); if(area7) area7.style.display = cleared.includes('6-5') ? 'block' : 'none';
             const area8 = document.getElementById('area-btn-8'); if(area8) area8.style.display = cleared.includes('7-5') ? 'block' : 'none';
+            const area9 = document.getElementById('area-btn-9'); if(area9) area9.style.display = cleared.includes('8-BOSS') ? 'block' : 'none';
             const tabEvent = document.getElementById('tab-btn-event'); if(tabEvent) tabEvent.style.display = cleared.includes('2-4') ? 'block' : 'none';
             const evVolcano2 = document.getElementById('btn-e-volcano2'); if(evVolcano2) evVolcano2.style.display = cleared.includes('e-volcano1') ? 'block' : 'none';
 
@@ -1426,7 +1437,7 @@ function playStageBgm(stageId) {
 
             let displayPoms = [...ownedPoms];
             if (currentSortType !== 'get') {
-                const rarityVal = { 'N': 1, 'SR': 2, 'HR': 3, 'UR': 4, 'LR': 5, 'OR': 6, 'RR': 7 };
+                const rarityVal = { 'N': 1, 'SR': 2, 'HR': 3, 'UR': 4, 'LR': 5, 'OR': 7, 'RR': 6 };
                 const attrVal = { 'red': 1, 'blue': 2, 'green': 3, 'yellow': 4, 'purple': 5 };
                 displayPoms.sort((a, b) => {
                     const pomA = pomDatabase[a]; const pomB = pomDatabase[b];
@@ -1851,7 +1862,7 @@ function playStageBgm(stageId) {
                     stageId: stageId, turns: data.turns, enemyHP: enemyObj.maxHp, enemyMaxHP: enemyObj.maxHp, 
                     enemyData: enemyObj, stageInfo: data, enemyCooldown: data.maxCooldown || 3, isDelayed: false, 
                     boardData: [], isProcessing: true, cloudTurns: Array.from({length: GRID_ROWS}, () => Array(GRID_COLS).fill(0)),
-                    nonstopCombo: 0, nonstopTriggeredThisTurn: false, iceDanceActive: false, skillUsedThisTurn: false, 
+                    nonstopCombo: 0, nonstopTriggeredThisTurn: false, iceDanceActive: false,petalDanceActive: false, holyComboActive: false, shadowDanceActive: false, skillUsedThisTurn: false, 
                     poisonTurns: 0, freezeTurns: 0, burnTurns: 0,
                     dokugasaneCombo: 0, dokugasaneTriggeredThisTurn: false,
                     isEnraged: false, boss16State: 1, boss18State: 1, timeStopActive: false
@@ -2657,7 +2668,7 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
 
                         async function processMatches(movedPomId = null, isTurnEndChain = false) {
             battleState.isProcessing = true; let combo = 0;
-            battleState.nonstopTriggeredThisTurn = false; battleState.iceDanceActive = false; battleState.skillUsedThisTurn = false;
+            battleState.nonstopTriggeredThisTurn = false; battleState.iceDanceActive = false; battleState.petalDanceActive = false; battleState.holyComboActive = false; battleState.shadowDanceActive = false; battleState.skillUsedThisTurn = false;
             battleState.dokugasaneTriggeredThisTurn = false;
             battleState.relayRushTriggeredThisTurn = false; // 追加：リレーラッシュのリセット
             battleState.nonstopPlusTriggeredThisTurn = false; // 追加：ノンストップ+のリセット
@@ -3109,7 +3120,51 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                                 } else if (pomData.skill === 'こおりのまい') {
                                     let chance = 30 + (battleState.supportBonus || 0);
                                     if (Math.random() * 100 < chance) { battleState.iceDanceActive = true; showSkillActivation(pomData.name + "「氷の舞!」"); activated = true; }
-                                } else if (pomData.skill === 'ノンストップ') {
+                                  } else if (pomData.skill === 'はなびらのまい') {
+                                    let chance = 30 + (battleState.supportBonus || 0);
+                                    if (Math.random() * 100 < chance) { battleState.petalDanceActive = true; showSkillActivation(pomData.name + "「花びらの舞!」"); activated = true; }
+                                } else if (pomData.skill === 'ホーリーコンボ') {
+                                    let chance = 30 + (battleState.supportBonus || 0);
+                                    if (Math.random() * 100 < chance) { battleState.holyComboActive = true; showSkillActivation(pomData.name + "「ホーリーコンボ!」"); activated = true; }
+                                } else if (pomData.skill === 'シャドーダンス') {
+                                    let chance = 30 + (battleState.supportBonus || 0);
+                                    if (Math.random() * 100 < chance) { battleState.shadowDanceActive = true; showSkillActivation(pomData.name + "「シャドーダンス!」"); activated = true; }
+                                } else if (pomData.skill === 'ライフブレイク' || pomData.skill === 'ハートシーカー') {
+                                    let chance = pomData.skill === 'ライフブレイク' ? (matchCount === 3 ? 100 : (matchCount === 4 ? 90 : 80)) : (matchCount === 3 ? 100 : (matchCount === 4 ? 85 : 75));
+                                    chance += (battleState.supportBonus || 0);
+                                    let hpPercent = (battleState.enemyHP / battleState.enemyMaxHP) * 100;
+                                    if (hpPercent >= 51 && Math.random() * 100 < chance) {
+                                        skillMultiplier = pomData.skill === 'ライフブレイク' ? 2.0 : 3.0;
+                                        showSkillActivation(pomData.name + `「${pomData.skill}!」`);
+                                        activated = true;
+                                    }
+                                } else if (pomData.skill === 'とどめうち' || pomData.skill === 'けっていだ') {
+                                    let chance = pomData.skill === 'とどめうち' ? (matchCount === 3 ? 100 : (matchCount === 4 ? 90 : 80)) : (matchCount === 3 ? 100 : (matchCount === 4 ? 85 : 75));
+                                    chance += (battleState.supportBonus || 0);
+                                    let hpPercent = (battleState.enemyHP / battleState.enemyMaxHP) * 100;
+                                    if (hpPercent <= 50 && Math.random() * 100 < chance) {
+                                        skillMultiplier = pomData.skill === 'とどめうち' ? 2.0 : 3.0;
+                                        showSkillActivation(pomData.name + `「${pomData.skill}!」`);
+                                        activated = true;
+                                    }
+                                } else if (pomData.skill === 'シックスセンス' || pomData.skill === 'シックスセンス+') {
+                                    if (matchCount >= 6) {
+                                        skillMultiplier = pomData.skill === 'シックスセンス' ? 2.0 : 3.0;
+                                        showSkillActivation(pomData.name + `「${pomData.skill}!」`);
+                                        activated = true;
+                                    }
+                                } else if (pomData.skill === 'ライトニング') {
+                                    let chance = 20 + (battleState.supportBonus || 0);
+                                    if (Math.random() * 100 < chance) {
+                                        if (!hasStatusAilment() && battleState.stageInfo.ojama) {
+                                            battleState.isDelayed = true;
+                                            battleState.enemyCooldown += 2;
+                                            showSkillActivation(pomData.name + "「ライトニング!」");
+                                            updatePuzzleUI();
+                                            activated = true;
+                                        }
+                                    }
+                            } else if (pomData.skill === 'ノンストップ') {
                                     battleState.nonstopTriggeredThisTurn = true; let multi = nonstopMultipliers[battleState.nonstopCombo]; skillMultiplier *= multi; if (multi > 1.0) showSkillActivation(pomData.name + `「連続 ${multi}倍!」`); else showSkillActivation(pomData.name + `「ノンストップ!」`); activated = true;
                                 } else if (pomData.skill === 'どくにする') {
                                     let chance = matchCount === 3 ? 10 : (matchCount === 4 ? 50 : 75);
@@ -3146,7 +3201,10 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                         }
 
                         if (battleState.iceDanceActive && pomData.attr === 'blue') { attrMultiplier *= 2.0; }
-                        if (battleState.burnTurns > 0 && pomData.attr === 'red') { attrMultiplier *= 1.2; }
+                        if (battleState.petalDanceActive && pomData.attr === 'green') { attrMultiplier *= 2.0; }
+                        if (battleState.holyComboActive && pomData.attr === 'yellow') { attrMultiplier *= 2.0; }
+                        if (battleState.shadowDanceActive && pomData.attr === 'purple') { attrMultiplier *= 2.0; }
+                       if (battleState.burnTurns > 0 && pomData.attr === 'red') { attrMultiplier *= 1.2; }
                         if (battleState.sleepTurns > 0) { attrMultiplier *= 1.2; }
 
                         if (fixedDamage > 0) { totalDmg += fixedDamage; } 
