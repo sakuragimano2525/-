@@ -317,8 +317,8 @@
                 ガチャ画面の「詳細確認」からご覧ください。<br>
                 <br>
                 <strong style="color: #2ecc71;">【イベント予告】</strong><br>
-                イベントステージ-伝説の試練が登場中！<br>
-                ホームからイベントをタップしてご確認ください。
+                イベントステージ-サファリゾーン①が登場中！<br>
+                〈URレア イーブイ〉などが手に入るチャンス！
             </div>
             
             <button class="action-btn" style="width: 100%; margin-bottom: 0;" onclick="document.getElementById('news-modal').style.display='none'">閉じる</button>
@@ -327,7 +327,7 @@
     <div id="trainer-rank-modal" class="modal-overlay" style="z-index: 3000;">
         <div class="modal-content" style="width: 95%; max-width: 650px; padding: 15px;">
             <h3 style="color: gold; margin-bottom: 10px;">🏅 トレーナーランク報酬</h3>
-            <div style="font-size: 13px; color: #ddd; margin-bottom: 10px;">ぽむの種類を集めてランクアップ！(初期ぽむは対象外)</div>
+            <div style="font-size: 13px; color: #ddd; margin-bottom: 10px;">ぽむを集めてランクアップ！</div>
             
             <div style="background: rgba(0,0,0,0.5); border-radius: 8px; padding: 10px; margin-bottom: 15px; border: 1px solid var(--ba-border);">
                 <div style="display: flex; justify-content: space-between; font-size: 14px; font-weight: bold; margin-bottom: 5px;">
@@ -489,6 +489,7 @@
                     <div id="event-area-select">
                         <h3 style="color:#9b59b6; margin-bottom:10px;">経験値ステージ</h3>
                         <button class="stage-btn list-btn" data-stage-id="e-exp1" style="border-color:#9b59b6; color:#9b59b6;" onclick="attemptStartEventPuzzle('e-exp1')">✨ 経験値ラッシュ！① (チケット1枚消費)</button>
+                        <button class="list-btn" onclick="showEventStageList('safari')">🐾 エリア：サファリゾーン①</button>
                         
                         <h3 style="color:#e74c3c; margin-bottom:10px; margin-top: 20px;">伝説の試練</h3>
                         <button class="list-btn" onclick="showEventStageList('volcano')">🌋 エリア：伝説の火山</button>
@@ -509,6 +510,15 @@
                         <button class="back-btn" onclick="hideEventStageList()">◀ イベント選択に戻る</button>
                         <button class="stage-btn list-btn" data-stage-id="e-forest1" style="border-color:#2ecc71; color:#2ecc71;" onclick="startPuzzle('e-forest1')">🌳 伝説の密林-1</button>
                     </div>
+                                    <div id="event-list-safari" style="display:none;">
+                        <button class="back-btn" onclick="hideEventStageList()">◀ イベント選択に戻る</button>
+                        <div style="background: rgba(0,0,0,0.6); padding: 10px; border-radius: 8px; margin-bottom: 15px; border: 1px solid var(--ba-border);">
+                            <div style="font-size: 13px; color: gold; margin-bottom: 5px; text-align: center; font-weight:bold;">【出現するぽむ】</div>
+                            <div id="safari-pom-list" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px 5px; justify-items: center;"></div>
+                        </div>
+                        <button class="stage-btn list-btn" data-stage-id="e-safari" style="border-color:#2ecc71; color:#2ecc71;" onclick="startSafariPuzzle()">🐾 サファリを探索 (🪙 300)</button>
+                    </div>
+
                 </div>
             </section>
             
@@ -559,7 +569,7 @@
         function getRarityColor(rarity) { const colors = { 'N': '#bdc3c7', 'SR': '#2ecc71', 'HR': '#9b59b6', 'UR': '#e74c3c', 'LR': 'gold', 'OR': 'transparent', 'RR': 'transparent' }; return colors[rarity] || '#bdc3c7'; }
 
         const pomDatabase = {
-            'p1': { id: 'p1', name: 'ヒトカゲ', img: 'pom1.png', attr: 'red',    basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'ねむらせる', skillDesc: 'ダメージ1.5倍(4つ消し限定)\n3/4/5つ以上で0/100/0%' },
+            'p1': { id: 'p1', name: 'ヒトカゲ', img: 'pom1.png', attr: 'red',    basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: '4つのちから', skillDesc: 'ダメージ1.5倍(4つ消し限定)\n3/4/5つ以上で0/100/0%' },
             'p2': { id: 'p2', name: 'ゼニガメ', img: 'pom2.png', attr: 'blue',   basePower: 35, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'きゅうしょをつく', skillDesc: 'ダメージ1.5倍\n3/4/5つ以上で10/50/100%' },
             'p3': { id: 'p3', name: 'フシギダネ', img: 'pom3.png', attr: 'green',  basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: '4つのちから', skillDesc: 'ダメージ1.5倍(4つ消し限定)\n3/4/5つ以上で0/100/0%' },
             'p4': { id: 'p4', name: 'ピカチュウ', img: 'pom4.png', attr: 'yellow', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'きまぐれ', skillDesc: '盤面の同ぽむを1つ消去\n3/4/5つ以上で30/50/100%' },
@@ -661,22 +671,49 @@
 'gp54': { id: 'gp54', name: 'ロズレイド', img: 'gpom54.png', attr: 'green', basePower: 60, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'リレーラッシュ', skillDesc: '連続発動で倍率上昇(最大3倍)\n3/4/5つ↑で100/100/100%' },  
 'gp55': { id: 'gp55', name: 'サンダー', img: 'gpom55.png', attr: 'yellow', basePower: 60, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'くもばらい+', skillDesc: '盤面の雲を3つ消去\n3/4/5つ↑で50/100/100%' },  
 'gp56': { id: 'gp56', name: 'クロバット', img: 'gpom56.png', attr: 'purple', basePower: 70, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'どくがさね', skillDesc: '毒状態の敵に連続発動で倍率UP\n3/4/5つ↑で50/100/100%' },
+            'gp57': { id: 'gp57', name: 'グライガー', img: 'gpom57.png', attr: 'red', basePower: 20, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'じゅうおうのキバ', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp58': { id: 'gp58', name: 'ミニリュウ', img: 'gpom58.png', attr: 'blue', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'おうえん', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp59': { id: 'gp59', name: 'ヨーギラス', img: 'gpom59.png', attr: 'green', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'きゅうしょをつく', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp60': { id: 'gp60', name: 'イワンコ', img: 'gpom60.png', attr: 'yellow', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'きまぐれ', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp61': { id: 'gp61', name: 'Gミノムッチ', img: 'gpom61.png', attr: 'purple', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'ふりはらう', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp62': { id: 'gp62', name: 'キュウコン', img: 'gpom62.png', attr: 'red', basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'HR', skill: '4つのちから', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp63': { id: 'gp63', name: 'ハクリュー', img: 'gpom63.png', attr: 'blue', basePower: 40, growth: 4, level: 1, exp: 0, rarity: 'HR', skill: 'だんけつ', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp64': { id: 'gp64', name: 'サナギラス', img: 'gpom64.png', attr: 'green', basePower: 30, growth: 5, level: 1, exp: 0, rarity: 'HR', skill: 'いれかえ', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp65': { id: 'gp65', name: 'リーシャン', img: 'gpom65.png', attr: 'yellow', basePower: 40, growth: 4, level: 1, exp: 0, rarity: 'HR', skill: 'いかく', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp66': { id: 'gp66', name: 'Gミノマダム', img: 'gpom66.png', attr: 'purple', basePower: 50, growth: 3, level: 1, exp: 0, rarity: 'HR', skill: 'バリアけし', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp67': { id: 'gp67', name: 'グライオン', img: 'gpom67.png', attr: 'red', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'じゅうおうのキバ', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp68': { id: 'gp68', name: 'ミロカロス', img: 'gpom68.png', attr: 'blue', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'オジャマけし+', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp69': { id: 'gp69', name: 'バンギラス', img: 'gpom69.png', attr: 'green', basePower: 70, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'ふりはらう', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp70': { id: 'gp70', name: '黄昏ルガルガン', img: 'gpom70.png', attr: 'yellow', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'ノンストップ+', skillDesc: '\n3/4/5つ以上で20/60/80%' },
+'gp71': { id: 'gp71', name: 'ムウマージ', img: 'gpom71.png', attr: 'purple', basePower: 60, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'さいごのちから', skillDesc: '\n3/4/5つ以上で20/60/80%' },
             
-            'sp1': { id: 'sp1', name: 'モクロー★', img: 'spom1.png', attr: 'green', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'RR', skill: 'ブロックくずし', skillDesc: 'ブロックを1つ消去\n3/4/5つ以上で100/100/100%' },
-            'sp2': { id: 'sp1', name: 'ピカチュウ★', img: 'spom2.png', attr: 'yellow', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'RR', skill: 'メガボルト', skillDesc: '稀にダメージ5倍\n3/4/5つ以上で10/20/40%' },
+            'sp1': { id: 'sp1', name: '✨モクロー', img: 'spom1.png', attr: 'green', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'RR', skill: 'ブロックくずし', skillDesc: 'ブロックを1つ消去\n3/4/5つ以上で100/100/100%' },
+            'sp2': { id: 'sp1', name: '✨ピカチュウ', img: 'spom2.png', attr: 'yellow', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'RR', skill: 'メガボルト', skillDesc: '稀にダメージ5倍\n3/4/5つ以上で10/20/40%' },
+            
+            'sap1': { id: 'sap1', name: 'コダック', img: 'sapom1.png', attr: 'blue', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'くもばらい', skillDesc: '盤面の雲を1つ消去\n3/4/5つ以上で100/100/100%' },
+'sap2': { id: 'sap2', name: 'レディバ', img: 'sapom2.png', attr: 'green', basePower: 20, growth: 5, level: 1, exp: 0, rarity: 'N', skill: 'むれをなす', skillDesc: '盤面の同ぽむ数×10の追加ダメージ\n3/4/5つ以上で20/60/80%' },
+'sap3': { id: 'sap3', name: 'ニャース', img: 'sapom3.png', attr: 'yellow', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'きまぐれ', skillDesc: '盤面の同ぽむを1つ消去\n3/4/5つ以上で30/50/100%' },
+'sap4': { id: 'sap4', name: 'パチリス', img: 'sapom4.png', attr: 'yellow', basePower: 30, growth: 4, level: 1, exp: 0, rarity: 'SR', skill: 'おうえん', skillDesc: '次に揃えるぽむのスキル発動確率+5%\n3/4/5つ以上で50/100/100%' },
+'sap5': { id: 'sap5', name: 'ノズパス', img: 'sapom5.png', attr: 'red', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'ブロックくずし', skillDesc: 'ブロックを1つ消去\n3/4/5つ以上で100/100/100%' },
+'sap6': { id: 'sap6', name: 'ダイノーズ', img: 'sapom6.png', attr: 'red', basePower: 40, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'ブロックくずし', skillDesc: 'ブロックを1つ消去\n3/4/5つ以上で100/100/100%' },
+'sap7': { id: 'sap7', name: 'パルデアウパー', img: 'sapom7.png', attr: 'purple', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'いれかえ', skillDesc: 'お邪魔を自ぽむに変換\n3/4/5つ以上で35/60/100%' },
+'sap8': { id: 'sap8', name: 'ドオー', img: 'sapom8.png', attr: 'purple', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'HR', skill: 'どくにする', skillDesc: '5Tの間、敵HP1%の毒ダメージ\n3/4/5つ以上で10/50/75%' },
+'sap9': { id: 'sap9', name: 'イーブイ', img: 'sapom9.png', attr: 'yellow', basePower: 50, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'きまぐれ+', skillDesc: '盤面の同ぽむを3つ消去\n3/4/5つ以上で25/40/100%' },
+'sap10': { id: 'sap10', name: '✨イーブイ', img: 'sapom10.png', attr: 'yellow', basePower: 50, growth: 4, level: 1, exp: 0, rarity: 'RR', skill: 'おうえん', skillDesc: '次に揃えるぽむのスキル発動確率+5%\n3/4/5つ以上で50/100/100%' },
+            
             
             // 新規マスターぽむ追加
             'mpom1': { id: 'mpom1', name: 'リザードン', img: 'mpom1.png', attr: 'red', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(赤ダメ1.5倍)\n3/4/5つ以上で0/55/80%' },
             'mpom2': { id: 'mpom2', name: 'カメックス', img: 'mpom2.png', attr: 'blue', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'バリアけし+', skillDesc: 'バリアを3つ消去\n3/4/5つ以上で50/100/100%' },
             'mpom3': { id: 'mpom3', name: 'フシギバナ', img: 'mpom3.png', attr: 'green', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'L字消し強化', skillDesc: 'L字消しで自身のダメージ3倍\n3/4/5つ以上で100/100/100%' },
-            'mpom5': { id: 'mpom5', name: 'ジュナイパー', img: 'mpom5.png', attr: 'green', basePower: 50, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'エレメントガード', skillDesc: '不利属性に通常ダメージを与え、さらに1.5倍\n3/4/5つ以上で50/100/100%' },
+            'mpom5': { id: 'mpom5', name: 'ジュナイパー', img: 'mpom5.png', attr: 'green', basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'エレメントガード', skillDesc: '不利属性に通常ダメージを与え、さらに1.5倍\n3/4/5つ以上で50/100/100%' },
             'mpom4': { id: 'mpom4', name: 'サザンドラ', img: 'mpom4.png', attr: 'purple', basePower: 70, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'ドラゴンのつめ', skillDesc: 'ダメージ3.0倍\n3/4/5つ以上で5/10/20%' }
         };
 
         const N_POOL = ['gp1', 'gp5', 'gp9','gp15','gp22','gp23','gp24','gp25','gp26','gp27','gp28','gp29','gp30','gp31','gp32','gp33','gp34','gp35','gp36','gp37']; 
-        const SR_POOL = ['gp2', 'gp6', 'gp10', 'gp11', 'gp16', 'gp17', 'gp18','gp38','gp39','gp40','gp41','gp42','gp43','gp44','gp45']; 
-        const HR_POOL = ['gp3', 'gp7', 'gp13','gp19','gp46','gp47','gp48','gp49','gp50','gp51']; 
-        const UR_POOL = ['gp4', 'gp8', 'gp12', 'gp14', 'gp20','gp52','gp53','gp54','gp55','gp56'];
+        const SR_POOL = ['gp2', 'gp6', 'gp10', 'gp11', 'gp16', 'gp17', 'gp18','gp38','gp39','gp40','gp41','gp42','gp43','gp44','gp45','gp57','gp58','gp59','gp60','gp61']; 
+        const HR_POOL = ['gp3', 'gp7', 'gp13','gp19','gp46','gp47','gp48','gp49','gp50','gp51','gp62','gp63','gp64','gp65','gp66']; 
+        const UR_POOL = ['gp4', 'gp8', 'gp12', 'gp14', 'gp20','gp52','gp53','gp54','gp55','gp56','gp67','gp68','gp69','gp70','gp71'];
         const LR_POOL = ['gp21'];
         
         const enemyDB = { 
@@ -692,7 +729,7 @@
             'e_pom10': { id: 'e_pom10', basePom: 'p10', name: 'スナバァ', img: 'pom10.png', attr: 'purple', maxHp: 2100 },
             'e_pom11': { id: 'e_pom11', basePom: 'p11', name: 'アゴジムシ', img: 'pom11.png', attr: 'green', maxHp: 2000 },
             'e_pom12': { id: 'e_pom12', basePom: 'p12', name: 'コソクムシ', img: 'pom12.png', attr: 'green', maxHp: 600 },
-            'e_pom13': { id: 'e_pom13', basePom: 'p13', name: 'グソクムシャ (BOSS)', img: 'pom13.png', attr: 'green', maxHp: 5000 },
+            'e_pom13': { id: 'e_pom13', basePom: 'p13', name: 'グソクムシャ (BOSS)', img: 'pom13.png', attr: 'green', maxHp: 4000 },
             'e_pom14': { id: 'e_pom14', basePom: 'p14', name: 'ナゾノクサ', img: 'pom14.png', attr: 'green', maxHp: 3100 },
             'e_pom15': { id: 'e_pom15', basePom: 'p15', name: 'ネイティ (BOSS)', img: 'pom15.png', attr: 'purple', maxHp: 3500 },
             'e_pom16': { id: 'e_pom16', basePom: 'p16', name: 'ビードル', img: 'pom16.png', attr: 'green', maxHp: 3000 },
@@ -713,7 +750,7 @@
             'e_pom31': { id: 'e_pom31', basePom: 'p31', name: 'レアコイル', img: 'pom31.png', attr: 'yellow', maxHp: 3000 },
             'e_pom32': { id: 'e_pom32', basePom: 'p32', name: 'ライチュウ', img: 'pom32.png', attr: 'yellow', maxHp: 4000 },
             'e_pom33': { id: 'e_pom33', basePom: 'p33', name: 'ライコウ (BOSS)', img: 'pom33.png', attr: 'yellow', maxHp: 5500 },
-                          'e_pom34': { id: 'e_pom34', basePom: 'p34', name: 'ユンゲラー', img: 'pom34.png', attr: 'purple', maxHp: 3000 },
+            'e_pom34': { id: 'e_pom34', basePom: 'p34', name: 'ユンゲラー', img: 'pom34.png', attr: 'purple', maxHp: 3000 },
             'e_pom35': { id: 'e_pom35', basePom: 'p35', name: 'ポリゴン', img: 'pom35.png', attr: 'red', maxHp: 2500 },
             'e_pom36': { id: 'e_pom36', basePom: 'p36', name: 'リグレー', img: 'pom36.png', attr: 'purple', maxHp: 3500 },
             'e_pom37': { id: 'e_pom37', basePom: 'p37', name: 'オーベム', img: 'pom37.png', attr: 'purple', maxHp: 2000 },
@@ -726,6 +763,17 @@
             'e_ip3': { id: 'e_ip3', basePom: 'ip3', name: 'サクラビス', img: 'ipom3.png', attr: 'blue', maxHp: 7000 },
             'e_ip4': { id: 'e_ip4', basePom: 'ip4', name: 'アギルダー', img: 'ipom4.png', attr: 'green', maxHp: 4500 },
             'e_ip5': { id: 'e_ip5', basePom: 'ip5', name: 'ヘルガー', img: 'ipom5.png', attr: 'red', maxHp: 6600 },
+             'e_sap1': { id: 'e_sap1', basePom: 'sap1', name: 'コダック', img: 'sapom1.png', attr: 'blue', maxHp: 1500 },
+            'e_sap2': { id: 'e_sap2', basePom: 'sap2', name: 'レディバ', img: 'sapom2.png', attr: 'green', maxHp: 1500 },
+            'e_sap3': { id: 'e_sap3', basePom: 'sap3', name: 'ニャース', img: 'sapom3.png', attr: 'yellow', maxHp: 1500 },
+            'e_sap4': { id: 'e_sap4', basePom: 'sap4', name: 'パチリス', img: 'sapom4.png', attr: 'yellow', maxHp: 3000 },
+            'e_sap5': { id: 'e_sap5', basePom: 'sap5', name: 'ノズパス', img: 'sapom5.png', attr: 'red', maxHp: 2000 },
+            'e_sap6': { id: 'e_sap6', basePom: 'sap6', name: 'ダイノーズ', img: 'sapom6.png', attr: 'red', maxHp: 4000 },
+            'e_sap7': { id: 'e_sap7', basePom: 'sap7', name: 'パルデアウパー', img: 'sapom7.png', attr: 'purple', maxHp: 2000 },
+            'e_sap8': { id: 'e_sap8', basePom: 'sap8', name: 'ドオー', img: 'sapom8.png', attr: 'purple', maxHp: 4500 },
+            'e_sap9': { id: 'e_sap9', basePom: 'sap9', name: 'イーブイ', img: 'sapom9.png', attr: 'yellow', maxHp: 5500 },
+            'e_sap10': { id: 'e_sap10', basePom: 'sap10', name: '✨イーブイ', img: 'sapom10.png', attr: 'yellow', maxHp: 6000 },
+
             'e_exp': { id: 'e_exp', basePom: 'ip1', name: 'ビクティニ', img: 'ipom1.png', attr: 'red', maxHp: 2500 }
         };
         
@@ -774,6 +822,7 @@
             'e-volcano2': { enemy: 'e_ip5', turns: 12, ojama: null, maxCooldown: 999, bg: 'map_ev1.png' },
             'e-water1': { enemy: 'e_ip3', turns: 15, ojama: 'boss_ip3', maxCooldown: 2, bg: 'map_ev1.png' },
             'e-forest1': { enemy: 'e_ip4', turns: 10, ojama: 'boss_ip4', maxCooldown: 2, bg: 'map_ev1.png' },
+            'e-safari': { enemy: 'e_sap1', turns: 15, ojama: null, maxCooldown: 3, bg: 'map_safari.png' },
             'e-exp1': { enemy: 'e_exp', turns: 10, ojama: 'event_rock', maxCooldown: 2, bg: 'map_ev1.png' }
         };
 
@@ -915,7 +964,7 @@
 
         // ========= トレーナーランク処理 =========
         const rankRewards = {
-            2: { type: 'stone', amount: 10, label: '魔法石 x10' },
+            2: { type: 'stone', amount: 20, label: '魔法石 x20' },
             3: { type: 'coin', amount: 1000, label: 'コイン x1000' },
             4: { type: 'book_blue', amount: 1, label: '強化の本・青 x1' },
             5: { type: 'pom', id: 'mpom1', label: 'リザードン (UR)' },
@@ -1122,7 +1171,56 @@
             startPuzzle(pendingStageId);
         }
 
-                function playStageBgm(stageId) {
+                        function updateSafariUI() {
+            const listEl = document.getElementById('safari-pom-list');
+            if (!listEl) return;
+            listEl.innerHTML = '';
+            for (let i = 1; i <= 10; i++) {
+                const baseId = 'sap' + i;
+                const pom = pomDatabase[baseId];
+                const isOwned = ownedPoms.includes(baseId);
+                
+                let el = document.createElement('div');
+                el.style.textAlign = 'center';
+                let imgHtml = `<div style="width:45px; height:45px; margin:0 auto; background-image:url('${pom.img}'); background-size:cover; border-radius:4px; border:2px solid ${isOwned ? 'gold' : '#555'}; ${!isOwned ? 'filter:brightness(0.3);' : ''}"></div>`;
+                let nameHtml = `<div style="font-size:10px; margin-top:4px; color:${isOwned ? 'gold' : '#aaa'};">${pom.name}${isOwned ? '★' : ''}</div>`;
+                el.innerHTML = imgHtml + nameHtml;
+                listEl.appendChild(el);
+            }
+        }
+
+                function startSafariPuzzle() {
+            if (playerData.coins < 300) { showCustomAlert('コインが足りません！'); return; }
+            if (!playerData.safariPool || playerData.safariPool.length === 0) {
+                playerData.safariPool = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10];
+            }
+            const idx = Math.floor(Math.random() * playerData.safariPool.length);
+            const drawnNum = playerData.safariPool.splice(idx, 1)[0];
+            const enemyId = 'e_sap' + drawnNum;
+            
+            // 敵に応じた行動とターン数をセット
+            const sapomParams = {
+                1: { ojama: 'sapom1', cd: 4 },
+                2: { ojama: 'sapom2', cd: 2 },
+                3: { ojama: 'sapom3', cd: 2 },
+                4: { ojama: 'sapom4', cd: 3 },
+                5: { ojama: 'sapom5', cd: 2 },
+                6: { ojama: 'sapom6', cd: 3 },
+                7: { ojama: 'sapom7', cd: 3 },
+                8: { ojama: 'sapom8', cd: 2 },
+                9: { ojama: 'sapom9', cd: 2 },
+                10: { ojama: 'sapom10', cd: 999 } // 先制のみなので999
+            };
+            
+            playerData.coins -= 300;
+            stageData['e-safari'].enemy = enemyId;
+            stageData['e-safari'].ojama = sapomParams[drawnNum].ojama;
+            stageData['e-safari'].maxCooldown = sapomParams[drawnNum].cd;
+            
+            saveData(); updateMenuUI(); startPuzzle('e-safari');
+        }
+
+function playStageBgm(stageId) {
             // 全てのBGMを一旦止めてリセットする
             bgm.pause(); 
             document.getElementById('battle-bgm').pause(); document.getElementById('battle-bgm').currentTime = 0; 
@@ -1144,6 +1242,14 @@
             // ステージごとの再生分け
             if (stageId === '8-BOSS') {
                 document.getElementById('boss-2-bgm').play().catch(()=>{});
+            }
+            else if (stageId === 'e-safari') {
+                const currentEnemy = stageData['e-safari'].enemy;
+                if (currentEnemy === 'e_sap8' || currentEnemy === 'e_sap9' || currentEnemy === 'e_sap10') {
+                    document.getElementById('eve-bgm').play().catch(()=>{});
+                } else {
+                    document.getElementById('battle-bgm').play().catch(()=>{});
+                }
             }
             else if (stageId === '3-4' || stageId === '7-2' || stageId === '8-4' || stageId === '4-4') {
                 document.getElementById('hard-bgm').play().catch(()=>{});
@@ -1343,17 +1449,20 @@
                     btn.style.pointerEvents = 'auto';
                 }
 
-                let newHTML = baseText;
-                const sData = stageData[sid];
-                if (sData) {
-                    const eData = enemyDB[sData.enemy];
-                    if (eData && ownedPoms.includes(eData.basePom)) newHTML = '<span style="color:gold;">★</span> ' + newHTML;
+                                let newHTML = baseText;
+                if (sid !== 'e-safari') { // ← サファリゾーンを例外にするif文を追加
+                    const sData = stageData[sid];
+                    if (sData) {
+                        const eData = enemyDB[sData.enemy];
+                        if (eData && ownedPoms.includes(eData.basePom)) newHTML = '<span style="color:gold;">★</span> ' + newHTML;
+                    }
+                    if (cleared.includes(sid)) newHTML += ' <span style="color:var(--hp-green); font-size:11px; margin-left:8px; border:1px solid var(--hp-green); padding:1px 4px; border-radius:3px;">CLEAR</span>';
                 }
-                if (cleared.includes(sid)) newHTML += ' <span style="color:var(--hp-green); font-size:11px; margin-left:8px; border:1px solid var(--hp-green); padding:1px 4px; border-radius:3px;">CLEAR</span>';
                 btn.innerHTML = newHTML;
             });
 
             updateExchangeShopUI();
+            updateSafariUI();
         }
 
         function createPomElement(pom) {
@@ -1798,7 +1907,20 @@
                         battleState.cloudTurns[1][c] = 3;
                     }
                     fullRenderBoard(); setTimeout(() => { showEnemySpeechBubble("雲を生成！"); battleState.isProcessing = false; }, 500);
-                } else if (data.ojama === 'boss40') {
+                                } else if (data.ojama === 'sapom10') {
+                    // Eの形にバリアを生成（一番下の6行目はそのまま）
+                    for(let r=0; r<5; r++) { 
+                        for(let c=0; c<GRID_COLS; c++) {
+                            if (r % 2 === 0 || c === 0) { // 偶数行または左端1列
+                                let id = battleState.boardData[r][c];
+                                if(id && !id.startsWith('barrier_') && id !== 'rock' && !id.startsWith('block_')) {
+                                    battleState.boardData[r][c] = 'barrier_' + id;
+                                }
+                            }
+                        }
+                    }
+                    fullRenderBoard(); setTimeout(() => { showEnemySpeechBubble("E字バリアを生成！"); battleState.isProcessing = false; }, 500);
+                  } else if (data.ojama === 'boss40') {
                     battleState.extraPom = 'p4'; // 新ギミック：第5ぽむフラグ
                     battleState.isProcessing = false;
                  } else { battleState.isProcessing = false; }
@@ -2069,7 +2191,7 @@ do { pomId = dropPool[Math.floor(Math.random() * dropPool.length)]; }
             } else if (skill === 'boss13') {
                 let r = Math.random() * 100;
                 if (r < 40) { let targets = normalCells.slice(0, 3); targets.forEach(t => battleState.cloudTurns[t.r][t.c] = 3); showEnemySpeechBubble("雲を生成！"); }
-                else if (r < 60) { let targets = normalCells.slice(0, 9); targets.forEach(t => battleState.boardData[t.r][t.c] = 'p12'); showEnemySpeechBubble("オジャマ12を生成！"); }
+                else if (r < 60) { let targets = normalCells.slice(0, 9); targets.forEach(t => battleState.boardData[t.r][t.c] = 'p12'); showEnemySpeechBubble("オジャマぽむを生成！"); }
                 else { let targets = normalCells.slice(0, 8); targets.forEach(t => battleState.boardData[t.r][t.c] = 'rock'); showEnemySpeechBubble("岩を生成！"); }
             } else if (skill === 'boss14') {
                 let targets = normalCells.slice(0, 7); targets.forEach(t => battleState.boardData[t.r][t.c] = 'rock'); showEnemySpeechBubble("コンボカウンター！岩生成！");
@@ -2079,7 +2201,7 @@ do { pomId = dropPool[Math.floor(Math.random() * dropPool.length)]; }
                 if (!battleState.boss16State || battleState.boss16State === 1) {
                     let targets = normalCells.slice(0, 6);
                     targets.forEach(t => battleState.boardData[t.r][t.c] = 'p16');
-                    showEnemySpeechBubble("オジャマぽむ16を生成！");
+                    showEnemySpeechBubble("オジャマぽむを生成！");
                     battleState.boss16State = 2;
                 } else {
                     let pom16Cells = [];
@@ -2329,6 +2451,78 @@ do { pomId = dropPool[Math.floor(Math.random() * dropPool.length)]; }
                 battleState.boardData[r][c+1] = 'block_5';
                 battleState.boardData[r+1][c+1] = 'block_5';
                 showEnemySpeechBubble("2x2ブロック生成！");
+                        } else if (skill === 'sapom1') {
+                let targets = normalCells.slice(0, 10);
+                targets.forEach(t => battleState.boardData[t.r][t.c] = 'rock');
+                showEnemySpeechBubble("岩を生成！");
+            } else if (skill === 'sapom2') {
+                let targets = normalCells.slice(0, 4);
+                targets.forEach(t => battleState.boardData[t.r][t.c] = 'sap2');
+                showEnemySpeechBubble("オジャマを生成！");
+            } else if (skill === 'sapom3') {
+                let targets = normalCells.slice(0, 2);
+                if (targets[0]) battleState.boardData[targets[0].r][targets[0].c] = 'block_5';
+                if (targets[1]) battleState.boardData[targets[1].r][targets[1].c] = 'barrier_' + targets[1].id;
+                showEnemySpeechBubble("ブロックとバリアを生成！");
+            } else if (skill === 'sapom4') {
+                if (Math.random() < 0.5) {
+                    let r = Math.floor(Math.random() * GRID_ROWS);
+                    for(let c=0; c<GRID_COLS; c++) battleState.cloudTurns[r][c] = 3;
+                    showEnemySpeechBubble("雲を生成！");
+                } else {
+                    let c = Math.floor(Math.random() * GRID_COLS);
+                    for(let r=0; r<GRID_ROWS; r++) battleState.boardData[r][c] = 'block_5';
+                    showEnemySpeechBubble("ブロックを生成！");
+                }
+            } else if (skill === 'sapom5') {
+                if (Math.random() < 0.5) {
+                    let targets = normalCells.slice(0, 3);
+                    targets.forEach(t => battleState.boardData[t.r][t.c] = 'rock');
+                    showEnemySpeechBubble("岩を生成！");
+                } else {
+                    let targets = normalCells.slice(0, 1);
+                    targets.forEach(t => battleState.boardData[t.r][t.c] = 'block_5');
+                    showEnemySpeechBubble("ブロックを生成！");
+                }
+            } else if (skill === 'sapom6') {
+                for(let c=0; c<GRID_COLS; c++) {
+                    if (c % 2 === 0) {
+                        battleState.boardData[0][c] = 'sap6';
+                        battleState.boardData[1][c] = 'block_5';
+                    } else {
+                        battleState.boardData[0][c] = 'block_5';
+                        battleState.boardData[1][c] = 'sap6';
+                    }
+                }
+                showEnemySpeechBubble("オジャマとブロックを生成！");
+            } else if (skill === 'sapom7') {
+                let r = Math.floor(Math.random() * GRID_ROWS);
+                for(let c=0; c<GRID_COLS; c++) battleState.boardData[r][c] = 'block_5';
+                showEnemySpeechBubble("ブロックを生成！");
+            } else if (skill === 'sapom8') {
+                battleState.sapom8State = battleState.sapom8State || 1;
+                if (battleState.sapom8State === 1) {
+                    let targets = normalCells.slice(0, 4);
+                    targets.forEach(t => battleState.boardData[t.r][t.c] = 'barrier_' + t.id);
+                    showEnemySpeechBubble("バリアを生成！");
+                    battleState.sapom8State = 2;
+                } else if (battleState.sapom8State === 2) {
+                    let targets = normalCells.slice(0, 2);
+                    targets.forEach(t => battleState.boardData[t.r][t.c] = 'block_5');
+                    showEnemySpeechBubble("ブロックを生成！");
+                    battleState.sapom8State = 3;
+                } else if (battleState.sapom8State === 3) {
+                    let c = Math.floor(Math.random() * GRID_COLS);
+                    for(let r=0; r<GRID_ROWS; r++) battleState.boardData[r][c] = 'rock';
+                    showEnemySpeechBubble("岩を生成！");
+                    battleState.sapom8State = 1;
+                }
+            } else if (skill === 'sapom9') {
+                for(let r=0; r<GRID_ROWS; r++) {
+                    battleState.boardData[r][0] = 'rock';
+                    battleState.boardData[r][GRID_COLS-1] = 'rock';
+                }
+                showEnemySpeechBubble("両端を岩化！");
             } else if (skill === 'boss_ip3') {
                 let r = Math.floor(Math.random() * (GRID_ROWS - 1));
                 let c = Math.floor(Math.random() * (GRID_COLS - 1));
@@ -2349,7 +2543,7 @@ do { pomId = dropPool[Math.floor(Math.random() * dropPool.length)]; }
             } else if (skill === 'event_rock') {
                 let c1 = Math.floor(Math.random() * 5); let c2 = c1 + 1;
                 for (let r = 0; r < GRID_ROWS; r++) { if (r % 2 === 0) { battleState.boardData[r][c1] = 'rock'; } else { battleState.boardData[r][c2] = 'rock'; } }
-                showEnemySpeechBubble("特殊岩生成！");
+                showEnemySpeechBubble("岩生成！");
             }
         }
 
@@ -2682,7 +2876,7 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                                     }
                                 }
                                 else if (pomData.skill === 'ノンストップ+') {
-                                    let chance = matchCount === 3 ? 20 : (matchCount === 4 ? 40 : 60);
+                                    let chance = matchCount === 3 ? 30 : (matchCount === 4 ? 50 : 70);
                                     chance += (battleState.supportBonus || 0);
                                     if (Math.random() * 100 < chance) {
                                         battleState.nonstopPlusTriggeredThisTurn = true;
