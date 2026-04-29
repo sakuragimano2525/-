@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>オリジナルパズルゲーム</title>
+    <title>ぽむぱず！</title>
     <style>
         :root {
             --ba-blue: #00a1e9; --ba-cyan: #00d2ff; --ba-bg-light: rgba(255, 255, 255, 0.15);
@@ -324,6 +324,13 @@
             <button class="action-btn" style="width: 100%; margin-bottom: 0;" onclick="document.getElementById('news-modal').style.display='none'">閉じる</button>
         </div>
     </div>
+       <div id="gift-modal" class="modal-overlay" style="z-index: 3600;">
+        <div class="modal-content" style="border: 2px solid gold; text-align: center;">
+            <h3 style="color: gold; margin-bottom: 15px;">🎁 プレゼント</h3>
+            <p id="gift-msg" style="margin-bottom: 20px; line-height: 1.6; font-weight: bold;"></p>
+            <button class="action-btn" onclick="closeGiftModal()" style="width: 100%; background: gold; color: black; box-shadow: 0 4px 0px #b8860b;">受け取る</button>
+        </div>
+    </div>
     <div id="trainer-rank-modal" class="modal-overlay" style="z-index: 3000;">
         <div class="modal-content" style="width: 95%; max-width: 650px; padding: 15px;">
             <h3 style="color: gold; margin-bottom: 10px;">🏅 トレーナーランク報酬</h3>
@@ -556,7 +563,9 @@
     <script>
         const EXP_TABLE = [0, 20, 30, 40, 50, 70, 90, 150, 200, 250]; const MAX_LEVEL = 10;
         const GRID_ROWS = 6; const GRID_COLS = 6;
+         const LATEST_GIFT_VERSION = 1; // ★アップデート時にここを増やすと再配布されます
 
+         
         const attrData = {
             'red':    { icon: '🔥', color: '#e74c3c', name: 'あか' },
             'blue':   { icon: '💧', color: '#3498db', name: 'あお' },
@@ -730,8 +739,8 @@
             'e_pom12': { id: 'e_pom12', basePom: 'p12', name: 'コソクムシ', img: 'pom12.png', attr: 'green', maxHp: 500 },
             'e_pom13': { id: 'e_pom13', basePom: 'p13', name: 'グソクムシャ (BOSS)', img: 'pom13.png', attr: 'green', maxHp: 3500 },
             'e_pom14': { id: 'e_pom14', basePom: 'p14', name: 'ナゾノクサ', img: 'pom14.png', attr: 'green', maxHp: 3100 },
-            'e_pom15': { id: 'e_pom15', basePom: 'p15', name: 'ネイティ (BOSS)', img: 'pom15.png', attr: 'purple', maxHp: 3500 },
-            'e_pom16': { id: 'e_pom16', basePom: 'p16', name: 'ビードル', img: 'pom16.png', attr: 'green', maxHp: 3000 },
+            'e_pom15': { id: 'e_pom15', basePom: 'p15', name: 'ネイティ', img: 'pom15.png', attr: 'purple', maxHp: 3250 },
+            'e_pom16': { id: 'e_pom16', basePom: 'p16', name: 'ビードル', img: 'pom16.png', attr: 'green', maxHp: 2500 },
             'e_pom17': { id: 'e_pom17', basePom: 'p17', name: 'モクロー', img: 'pom17.png', attr: 'green', maxHp: 900 },
             'e_pom18': { id: 'e_pom18', basePom: 'p18', name: 'シャンデラ (BOSS)', img: 'pom18.png', attr: 'red', maxHp: 3800 },
             'e_pom19': { id: 'e_pom19', basePom: 'p19', name: 'ポニータ', img: 'pom19.png', attr: 'red', maxHp: 2500 },
@@ -789,7 +798,7 @@
             '3-2': { enemy: 'e_pom10', turns: 18, ojama: 'boss10', maxCooldown: 3, bg: 'map3.png' },
             '3-3': { enemy: 'e_pom11', turns: 15, ojama: 'block2', maxCooldown: 2, bg: 'map3.png' },
             '3-4': { enemy: 'e_pom12', turns: 5, ojama: null, maxCooldown: 999, bg: 'map3.png' },
-            '3-5': { enemy: 'e_pom13', turns: 17, ojama: 'boss13', maxCooldown: 2, bg: 'map3_2.png' },
+            '3-5': { enemy: 'e_pom13', turns: 18, ojama: 'boss13', maxCooldown: 2, bg: 'map3_2.png' },
             '4-1': { enemy: 'e_pom14', turns: 14, ojama: 'boss14', maxCooldown: 999, bg: 'map4.png' },
             '4-2': { enemy: 'e_pom15', turns: 12, ojama: 'boss15', maxCooldown: 999, bg: 'map4.png' },
             '4-3': { enemy: 'e_pom16', turns: 15, ojama: 'boss16', maxCooldown: 2, bg: 'map4.png' },
@@ -968,9 +977,9 @@
             4: { type: 'stone', amount: 20, label: '魔法石 x20' },
             5: { type: 'pom', id: 'mpom1', label: 'リザードン (UR)' },
             6: { type: 'stone', amount: 20, label: '魔法石 x20' },
-            7: { type: 'coin', amount: 1000, label: 'コイン x1000' },
+            7: { type: 'stone', amount: 20, label: '魔法石 x20' },
             8: { type: 'book_blue', amount: 1, label: '強化の本・青 x1' },
-            9: { type: 'coin', amount: 1000, label: 'コイン x1000' },
+            9: { type: 'coin', amount: 2000, label: 'コイン x2000' },
             10: { type: 'pom', id: 'mpom2', label: 'カメックス (UR)' },
             11: { type: 'stone', amount: 5, label: '魔法石 x5' },
             12: { type: 'stone', amount: 10, label: '魔法石 x10' },
@@ -1095,7 +1104,7 @@
         function showCustomAlert(msg) { document.getElementById('custom-alert-msg').innerText = msg; document.getElementById('custom-alert-modal').style.display = 'flex'; }
 
         // ゲーム初期化処理 (Startボタン押下時)
-        function initializeGame() {
+                function initializeGame() {
             const doc = document.documentElement; if (doc.requestFullscreen) doc.requestFullscreen();
             if (screen.orientation && screen.orientation.lock) screen.orientation.lock('landscape').catch(()=>{});
             bgm.play().catch(e => console.log(e)); 
@@ -1103,9 +1112,41 @@
             
             loadData();
             updateMenuUI();
-            checkLoginBonus();
+            checkGift(); // ← ここを checkGift に変える
+        }
+                function checkGift() {
+            playerData.receivedGiftVersion = playerData.receivedGiftVersion || 0;
+            
+            if (playerData.receivedGiftVersion < LATEST_GIFT_VERSION) {
+                // 配布するプレゼントの内容
+                const giftCoins = 200;
+                const giftStones = 20;
+                
+                playerData.coins += giftCoins;
+                playerData.stones += giftStones;
+                playerData.receivedGiftVersion = LATEST_GIFT_VERSION;
+                saveData();
+                updateMenuUI();
+                
+                // モーダルのテキストを設定して表示
+                document.getElementById('gift-msg').innerHTML = 
+                    `テスト記念のプレゼント！<br><br>` +
+                    `<span style="font-size: 18px; color: gold;">🪙 コイン × ${giftCoins}</span><br>` +
+                    `<span style="font-size: 18px; color: var(--ba-cyan);">◆ 魔法石 × ${giftStones}</span><br><br>` +
+                    `を受け取りました！`;
+                document.getElementById('gift-modal').style.display = 'flex';
+            } else {
+                // すでに受け取り済みなら、通常通りログインボーナスの確認へ
+                checkLoginBonus();
+            }
         }
 
+        function closeGiftModal() {
+            document.getElementById('gift-modal').style.display = 'none';
+            document.getElementById('up-se').play().catch(e=>{});
+            // プレゼント画面を閉じた後、ログインボーナスの確認へ進む
+            checkLoginBonus();
+        }
                 document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 if(btn.id === 'trainer-rank-btn') return; // 個別の機能を持つボタンは除外
