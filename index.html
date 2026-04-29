@@ -316,6 +316,9 @@
                 新しいぽむがガチャに登場しました。<br>
                 ガチャ画面の「詳細確認」からご覧ください。<br>
                 <br>
+                <strong style="color: #e74c3c;">【バグ修正】</strong><br>
+                〈じゅうおうのキバ〉のバグを修正しました<br>
+                <br>
                 <strong style="color: #2ecc71;">【イベント予告】</strong><br>
                 イベントステージ-サファリゾーン①が登場中！<br>
                 〈URレア イーブイ〉などが手に入るチャンス！
@@ -2830,14 +2833,18 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                                         ojamaPoms.sort(() => Math.random() - 0.5); let targets = ojamaPoms.slice(0, count);
                                         if (targets.length > 0) { targets.forEach(t => skillDestroyList.push(t)); showSkillActivation(pomData.name + "「" + pomData.skill + "!」"); activated = true; }
                                     }
-                                } else if (pomData.skill === 'じゅうおうのキバ') {
+                                } 
+                                                                else if (pomData.skill === 'じゅうおうのキバ') {
                                     let chance = matchCount === 3 ? 25 : (matchCount === 4 ? 75 : 100);
                                     chance += (battleState.supportBonus || 0);
                                     if (Math.random() * 100 < chance) {
                                         let cands = []; for(let r=0; r<GRID_ROWS; r++){ for(let c=0; c<GRID_COLS; c++){ if (battleState.boardData[r][c] === 'rock') cands.push({r, c}); } }
-                                        if (cands.length > 0) skillDestroyList.push(cands[Math.floor(Math.random() * cands.length)]);
-                                        skillMultiplier = 3.0;
-                                        showSkillActivation(pomData.name + "「獣王のキバ!」"); activated = true;
+                                        if (cands.length > 0) {
+                                            skillDestroyList.push(cands[Math.floor(Math.random() * cands.length)]);
+                                            skillMultiplier = 3.0;
+                                            showSkillActivation(pomData.name + "「獣王のキバ!」"); 
+                                            activated = true;
+                                        }
                                     }
                                 }
                                 else if (pomData.skill === 'パワーパンチ') {
