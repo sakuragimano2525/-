@@ -316,12 +316,13 @@
                 新しいぽむがガチャに登場しました。<br>
                 ガチャ画面の「詳細確認」からご覧ください。<br>
                 <br>
-                <strong style="color: #e74c3c;">【バグ修正】</strong><br>
-                〈じゅうおうのキバ〉のバグを修正しました<br>
-                <br>
                 <strong style="color: #2ecc71;">【イベント予告】</strong><br>
                 イベントステージ-サファリゾーン①が登場中！<br>
-                〈URレア イーブイ〉などが手に入るチャンス！
+                「URレア イーブイ」などが手に入るチャンス！<br>
+                <br>
+                <strong style="color: #0095d9;">【細かい修正点】</strong><br>
+                ・ステージの難易度を一部調整しました<br>
+                ・スキルの一部効果、説明を変更しました
             </div>
             
             <button class="action-btn" style="width: 100%; margin-bottom: 0;" onclick="document.getElementById('news-modal').style.display='none'">閉じる</button>
@@ -599,8 +600,8 @@
             'p16': { id: 'p16', name: 'ビードル', img: 'pom16.png', attr: 'green', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'むれをなす', skillDesc: '盤面の同ぽむ数×10の追加ダメージ\n3/4/5つ以上で20/60/80%' },
             'p17': { id: 'p17', name: 'モクロー', img: 'pom17.png', attr: 'green', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'きまぐれ', skillDesc: '盤面の同ぽむを1つ消去\n3/4/5つ以上で30/50/100%' },
             'p18': { id: 'p18', name: 'シャンデラ', img: 'pom18.png', attr: 'red', basePower: 60, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: '5つのちから+', skillDesc: '5つ消すとダメージ2.5倍\n5つ以上で100%' },
-            'p19': { id: 'p19', name: 'ポニータ', img: 'pom19.png', attr: 'red', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(赤ダメ1.5倍)\n3/4/5つ以上で0/55/80%' },
-            'p20': { id: 'p20', name: 'ロコン', img: 'pom20.png', attr: 'red', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(赤ダメ1.5倍)\n3/4/5つ以上で0/55/80%' },
+            'p19': { id: 'p19', name: 'ポニータ', img: 'pom19.png', attr: 'red', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(🟥属性ダメ1.2倍)\n3/4/5つ以上で0/50/75%' },
+            'p20': { id: 'p20', name: 'ロコン', img: 'pom20.png', attr: 'red', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(🟥属性ダメ1.2倍)\n3/4/5つ以上で0/50/75%' },
              'p21': { id: 'p21', name: 'ヤトウモリ', img: 'pom21.png', attr: 'red', basePower: 20, growth: 4, level: 1, exp: 0, rarity: 'N', skill: 'むれをなす', skillDesc: '盤面の同ぽむ数×10の追加ダメージ\n3/4/5つ以上で20/60/80%' },
 'p22': { id: 'p22', name: 'ガーディ', img: 'pom22.png', attr: 'red', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'いかく', skillDesc: '敵の行動を1ターン🕒\n3/4/5つ以上で20/30/100%' },
 'p23': { id: 'p23', name: 'クレベース', img: 'pom23.png', attr: 'blue', basePower: 60, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'いわをけす+', skillDesc: '岩を3つ消去\n3/4/5つ以上で50/100/100%' },
@@ -634,7 +635,7 @@
             'gp5': { id: 'gp5', name: 'カブト', img: 'gpom5.png', attr: 'blue',   basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'ノンストップ', skillDesc: '連続発動で倍率上昇(最大2倍)\n3/4/5つ以上で100/100/100%' },
             'gp6': { id: 'gp6', name: 'ベロリンガ', img: 'gpom6.png', attr: 'red',    basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'SR', skill: 'いれかえ', skillDesc: 'お邪魔を自ぽむに変換\n3/4/5つ以上で35/60/100%' },
             'gp7': { id: 'gp7', name: 'ガルーラ', img: 'gpom7.png', attr: 'yellow', basePower: 50, growth: 3, level: 1, exp: 0, rarity: 'HR', skill: 'L字消し強化', skillDesc: 'L字消しで自身のダメージ3倍\n3/4/5つ以上で100/100/100%' },
-            'gp8': { id: 'gp8', name: 'フリーザー', img: 'gpom8.png', attr: 'blue',   basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'こおりのまい', skillDesc: '1ターンの間、🟦属性ダメージ2倍\n3/4/5つ以上で30/30/30%' },
+            'gp8': { id: 'gp8', name: 'フリーザー', img: 'gpom8.png', attr: 'blue',   basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'こおりのまい', skillDesc: '1ターンの間、🟦属性ダメ2倍\n3/4/5つ以上で30/30/30%' },
             'gp9': { id: 'gp9', name: 'ドガース', img: 'gpom9.png', attr: 'purple', basePower: 30, growth: 3, level: 1, exp: 0, rarity: 'N', skill: 'どくにする', skillDesc: '5Tの間、敵HP1%の毒ダメージ\n3/4/5つ以上で10/50/75%' },
             'gp10': { id: 'gp10', name: 'ブーバー', img: 'gpom10.png', attr: 'red', basePower: 40, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'さいごのちから', skillDesc: '残り3手以下でダメージ3倍\n3/4/5つ以上で50/50/100%' },
             'gp11': { id: 'gp11', name: 'エレブー', img: 'gpom11.png', attr: 'yellow', basePower: 40, growth: 3, level: 1, exp: 0, rarity: 'SR', skill: 'アップダウン', skillDesc: 'ダメージが0.3〜3.0倍に変動\n3/4/5つ以上で50/80/100%' },
@@ -712,9 +713,8 @@
 'sap9': { id: 'sap9', name: 'イーブイ', img: 'sapom9.png', attr: 'yellow', basePower: 50, growth: 3, level: 1, exp: 0, rarity: 'UR', skill: 'きまぐれ+', skillDesc: '盤面の同ぽむを3つ消去\n3/4/5つ以上で25/40/100%' },
 'sap10': { id: 'sap10', name: '✨イーブイ', img: 'sapom10.png', attr: 'yellow', basePower: 50, growth: 4, level: 1, exp: 0, rarity: 'RR', skill: 'おうえん', skillDesc: '次に揃えるぽむのスキル発動確率+5%\n3/4/5つ以上で50/100/100%' },
             
-            
             // 新規マスターぽむ追加
-            'mpom1': { id: 'mpom1', name: 'リザードン', img: 'mpom1.png', attr: 'red', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(赤ダメ1.5倍)\n3/4/5つ以上で0/55/80%' },
+            'mpom1': { id: 'mpom1', name: 'リザードン', img: 'mpom1.png', attr: 'red', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'やけどにさせる', skillDesc: '敵をやけど状態にする(🟥属性ダメ1.2倍)\n3/4/5つ以上で0/55/80%' },
             'mpom2': { id: 'mpom2', name: 'カメックス', img: 'mpom2.png', attr: 'blue', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'バリアけし+', skillDesc: 'バリアを3つ消去\n3/4/5つ以上で50/100/100%' },
             'mpom3': { id: 'mpom3', name: 'フシギバナ', img: 'mpom3.png', attr: 'green', basePower: 60, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'L字消し強化', skillDesc: 'L字消しで自身のダメージ3倍\n3/4/5つ以上で100/100/100%' },
             'mpom5': { id: 'mpom5', name: 'ジュナイパー', img: 'mpom5.png', attr: 'green', basePower: 50, growth: 2, level: 1, exp: 0, rarity: 'UR', skill: 'エレメントガード', skillDesc: '不利属性に通常ダメージを与え、さらに1.5倍\n3/4/5つ以上で50/100/100%' },
@@ -3080,7 +3080,7 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                                     chance += (battleState.supportBonus || 0);
                                     if (Math.random() * 100 < chance) { if (!hasStatusAilment() && battleState.stageInfo.ojama) { battleState.freezeTurns = 4; showSkillActivation(pomData.name + "「凍らせる!」"); updatePuzzleUI(); activated = true; } }
                                 } else if (pomData.skill === 'やけどにさせる') {
-                                    let chance = matchCount === 3 ? 0 : (matchCount === 4 ? 55 : 80);
+                                    let chance = matchCount === 3 ? 0 : (matchCount === 4 ? 50 : 75);
                                     chance += (battleState.supportBonus || 0);
                                     if (Math.random() * 100 < chance) { if (!hasStatusAilment()) { battleState.burnTurns = 4; showSkillActivation(pomData.name + "「やけど!」"); updatePuzzleUI(); activated = true; } }
                                 } else if (pomData.skill === 'いれかえ') {
@@ -3146,7 +3146,7 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                         }
 
                         if (battleState.iceDanceActive && pomData.attr === 'blue') { attrMultiplier *= 2.0; }
-                        if (battleState.burnTurns > 0 && pomData.attr === 'red') { attrMultiplier *= 1.5; }
+                        if (battleState.burnTurns > 0 && pomData.attr === 'red') { attrMultiplier *= 1.2; }
                         if (battleState.sleepTurns > 0) { attrMultiplier *= 1.2; }
 
                         if (fixedDamage > 0) { totalDmg += fixedDamage; } 
