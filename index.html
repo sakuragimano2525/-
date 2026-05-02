@@ -609,7 +609,7 @@
             
             <div id="news-content" style="background: rgba(0,0,0,0.5); border: 1px solid var(--ba-border); border-radius: 8px; padding: 15px; margin-bottom: 15px; font-size: 13px; line-height: 1.6; max-height: 50vh; overflow-y: auto;">
                 <strong style="color: gold;">【アップデート情報】</strong><br>
-                ・⛰️エリア9「水鏡山」を追加しました！<br>
+                ・⛰️エリア9「水鏡山」を追加しました！！<br>
                 ・強化の際にまとめて強化本を使う事が出来るようになりました<br>
                 <br>
                 <strong style="color: #e74c3c;">【新機能の追加】</strong><br>
@@ -4009,11 +4009,11 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                 }
             }
 
-                            updatePuzzleUI(); battleState.isProcessing = false;
+                    updatePuzzleUI(); battleState.isProcessing = false;
             
-                             if (battleState.enemyHP <= 0) { 
+            if (battleState.enemyHP <= 0) { 
                 
-                stopAllBattleBgm(); // ★ここもこれ1行に書き換え
+                stopAllBattleBgm(); 
                 
                 const spEl = document.getElementById('enemy-sprite');
                 spEl.classList.add('enemy-defeat');
@@ -4022,22 +4022,11 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                     processWin(); 
                 }, 1500);
                
-                            } else if (battleState.turns <= 0) { 
-                
-                stopAllBattleBgm(); // ★追加
-                
-                document.getElementById('gameover-bgm').play().catch(e=>{});
-                setTimeout(() => { 
-                    document.getElementById('clear-bgm').currentTime = 0; document.getElementById('clear-bgm').play().catch(e=>{});
-                    processWin(); 
-                }, 1500);
             } else if (battleState.turns <= 0) { 
-                document.getElementById('battle-bgm').pause(); 
-                document.getElementById('boss-bgm').pause(); 
-                document.getElementById('hard-bgm').pause();
-                const eveBgm = document.getElementById('eve-bgm'); if(eveBgm){ eveBgm.pause(); }
-                const eve2Bgm = document.getElementById('eve-2-bgm'); if(eve2Bgm){ eve2Bgm.pause(); }
-
+                // 手数が0になった時の正しい処理（1つにまとめました）
+                stopAllBattleBgm(); 
+                
+                document.getElementById('gameover-bgm').currentTime = 0;
                 document.getElementById('gameover-bgm').play().catch(e=>{});
                 
                 setTimeout(() => { 
@@ -4053,7 +4042,7 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
                     });
                 }, 500); 
             }
-        }
+        } 
 
         function getAttributeMultiplier(atkAttr, defAttr) {
             if (defAttr === 'mirror') {
@@ -4257,6 +4246,10 @@ if (!blockedByBarrier) { battleState.boardData[r][c] = dropPool[Math.floor(Math.
             } else if (inputVal === 'むらのさやか') {
                 playerData.stones += 5;
                 rewardMsg = '◆ 魔法石 ×5';
+                success = true;
+            } else if (inputVal === 'まむし') {
+                playerData.stones += 15;
+                rewardMsg = '◆ 魔法石 ×15';
                 success = true;
             } else {
                 showCustomAlert('合言葉が間違っているか、存在しません。');
